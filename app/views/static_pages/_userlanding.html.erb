@@ -1,0 +1,49 @@
+<h1>Welcome, <%= current_user.name %></h1>
+<% mechanize = Mechanize.new %>
+<% mechanize.follow_meta_refresh = true %>
+<%page = mechanize.get('https://rain.gsw.edu/prod8x/twbkwbis.P_WWWLogin') %>
+<% pp page %>
+<% form = page.form('loginform')%>
+<% form.sid = current_user.gswid %>
+<% form.PIN = current_user.gswpin %>
+<%button = form.button_with(:value => 'Login') %>
+<% page = mechanize.submit(form, button) %>
+<% page = page.link_with(:text => 'Student Services').click %>
+<% page = page.link_with(:text => 'Registration').click %>
+<% page = page.link_with(:text => 'Concise Student Schedule').click %>
+<% tableXpath = "//table[2]/tr" %>
+<% table = page.parser.xpath(tableXpath) %>
+<table class='table-hover table-bordered'>
+<thead>
+<tr>
+<% $i = 1 %>
+<% $num = 13 %>
+<% begin %>
+  <% if $i == 1 %>
+    <th>CRN</th>
+  <% else %>
+    <% tempXpath =  tableXpath + '[1]/th['+ $i.to_s + ']/text()'%>
+    <th><%= page.parser.xpath(tempXpath).text %></th>
+    <% end %>
+  <% $i += 1 %>
+<% end while $i < $num %>
+</tr>
+</thead>
+<tbody>
+<% $i = 2 %>
+<% begin %>
+  <tr>
+  <% $x = 1 %>
+  <% begin %>
+    <% tempXpath =  tableXpath + '[' + $i.to_s + ']/td['+ $x.to_s + ']/text()'%>
+    <td><%= page.parser.xpath(tempXpath).text %></td>
+      <% $x += 1 %>
+    <% end while $x < 13%>
+    </tr>
+  <% $i += 1 %>
+<% end while $i < table.size %>
+</tbody>
+</table>
+
+
+

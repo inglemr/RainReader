@@ -1,0 +1,11 @@
+<% if logged_in? %>
+  <%= render 'userlanding' %>
+<% else %>
+<div class="center jumbotron">
+<p>This applicaton displays RAIN in a more responsive way making it easier to work with for the user</p>
+<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+</div>
+<%= link_to image_tag("logo.svg", alt: "Rails logo"),
+            'http://gsw.edu' %>
+<% end %>
+
