@@ -1,4 +1,5 @@
 <h1>Welcome, <%= current_user.name %></h1>
+<% if current_user.gswid && current_user.gswpin%>
 <% mechanize = Mechanize.new %>
 <% mechanize.follow_meta_refresh = true %>
 <%page = mechanize.get('https://rain.gsw.edu/prod8x/twbkwbis.P_WWWLogin') %>
@@ -42,6 +43,9 @@
     </tr>
   <% $i += 1 %>
 <% end while $i < table.size %>
+<% else %>
+<% flash[:notice] = "Add your GSW ID And PIN to your profile to display your class schedule here" %>
+<%end %>
 </tbody>
 </table>
 
