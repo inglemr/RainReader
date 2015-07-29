@@ -16,3 +16,7 @@
 //= require bootstrap
 //= require_tree
 
+$ ->
+  $(".alert, .alert-notice").on("click", (event)->
+    $(event.target).hide("slow")
+  )
