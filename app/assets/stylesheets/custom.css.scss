@@ -205,3 +205,52 @@ input {
 	text-align: center;
 
 }
+
+.refreshClass {
+	 border: 1px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -border-radius: 10px;
+	float:right;
+	margin: 5px;
+}
+
+
+
+.alert {
+    text-align: center;
+    padding:	.3em .4em;
+    margin:		0 auto .5em;
+    clear:		both;
+    max-width:	46.923em; /* 610/13 */
+    *max-width:	45.750em; /* 610/13.3333 - for IE */
+}
+
+.alert.error {
+    border: thin solid #8b0000;
+    background: #ffc0cb;
+}
+
+.alert-notice, .alert.info {
+    border: thin solid #ff0;
+    background: #ffe;
+    color: green;
+		ul{
+			color: green;
+			margin: 0 0 30px 0;
+		}
+}
+
+.alert.warning {
+    border: thin solid #b8860b;
+    background: #ff0;
+}
+
+.alert .close {
+    float:	right;
+}
+
+.alert .close a {
+    color:				#f00;
+    text-decoration:	none;
+}

@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728194053) do
+ActiveRecord::Schema.define(version: 20150729154339) do
+
+  create_table "s_classes", force: :cascade do |t|
+    t.string   "CRN"
+    t.string   "Course"
+    t.string   "Title"
+    t.string   "Campus"
+    t.string   "Credits"
+    t.string   "StartDate"
+    t.string   "EndDate"
+    t.string   "Days"
+    t.string   "Time"
+    t.string   "Location"
+    t.string   "Instructor"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "s_classes", ["user_id", "created_at"], name: "index_s_classes_on_user_id_and_created_at"
+  add_index "s_classes", ["user_id"], name: "index_s_classes_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +43,7 @@ ActiveRecord::Schema.define(version: 20150728194053) do
     t.boolean  "admin",           default: false
     t.string   "gswid"
     t.string   "gswpin"
+    t.datetime "classUpdateTime"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -7,5 +7,14 @@ class StaticPagesController < ApplicationController
 
   def about
   end
-  
+
+  def refresh_action
+    @user = User.find(params[:user_id])
+    if @user == current_user
+      getSchedule(current_user,true)
+    end
+    render 'home'
+  end
+
+
 end

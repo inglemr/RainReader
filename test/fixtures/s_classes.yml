@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  CRN: 
+  Course: 
+  Title: 
+  Campus: 
+  Credits: 
+  StartDate: 
+  EndDate: 
+  Days: 
+  Time: 
+  Location: 
+  Instructor: 
+
+two:
+  CRN: 
+  Course: 
+  Title: 
+  Campus: 
+  Credits: 
+  StartDate: 
+  EndDate: 
+  Days: 
+  Time: 
+  Location: 
+  Instructor: 

@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+ $ ->
+  $(".alert, .alert-notice").on("click", (event)->
+    $(event.target).hide("slow")
+  )
+
