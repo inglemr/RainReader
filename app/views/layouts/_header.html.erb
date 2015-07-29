@@ -35,7 +35,9 @@
     </header>
 
     <nav class="navbar-default">
-       <ul class="navbar nav ">
-          <li><%= link_to "Test", '#' %></li>
+       <ul class="nav  nav-pills nav-justified">
+          <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Schedule", root_path %></li>
+          <li class="<%= 'active' if current_page?(help_path) %>"><%= link_to "Drop/Add Classes", '#' %></li>
+          <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to "List All Classes", '#' %></li>
         </ul>
-        </nav>
+    </nav>

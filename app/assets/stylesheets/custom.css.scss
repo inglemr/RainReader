@@ -254,3 +254,18 @@ input {
     color:				#f00;
     text-decoration:	none;
 }
+
+li.active{
+
+}
+
+.nav-pills > li.active > a,
+.nav-pills>li.active>a:hover {
+    background-color:blue;
+}
+
+
+.nav-pills>li>a:hover {
+    text-decoration: none;
+    background-color: yellow;
+}
