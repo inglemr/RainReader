@@ -33,11 +33,15 @@
         </nav>
       </div>
     </header>
-
+    <% if logged_in? %>
     <nav class="navbar-default">
        <ul class="nav  nav-pills nav-justified">
           <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Schedule", root_path %></li>
-          <li class="<%= 'active' if current_page?(help_path) %>"><%= link_to "Drop/Add Classes", '#' %></li>
-          <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to "List All Classes", '#' %></li>
+          <li class="<%= 'active' if current_page?(previous_class_path) %>"><%= link_to "Previous Classes", previous_class_path %></li>
+          <li class="<%= 'active' if current_page?(drop_add_path) %>"><%= link_to "Drop/Add Classes", drop_add_path %></li>
+          <li class="<%= 'active' if current_page?(class_list_path) %>"><%= link_to "List All Classes", class_list_path %></li>
+          <li class="<%= 'active' if current_page?(finaid_path) %>"><%= link_to "Finanical Aid", finaid_path %></li>
+             <li class="<%= 'active' if current_page?(grades_path) %>"><%= link_to "Grades", grades_path %></li>
         </ul>
+        <% end %>
     </nav>

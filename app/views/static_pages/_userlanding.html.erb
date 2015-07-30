@@ -1,4 +1,6 @@
-<h1>Welcome, <%= current_user.name %></h1>
+<h3 class="inline"><%= current_user.name %>,</h3>
+<h3 class="inline right-text ">Course Schedule</h3>
+
 <% if current_user.gswid && current_user.gswpin%>
 <% getSchedule(current_user,false) %>
   <%= render 'studentSchedule' %>

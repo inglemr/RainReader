@@ -5,9 +5,14 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'about' => 'static_pages#about'
+  get 'class_list' => 'static_pages#class_list'
   get 'help' => 'static_pages#help'
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
+  get 'previous_class' => 'static_pages#previous_class'
+  get 'drop_add' => 'static_pages#drop_add'
+  get 'finaid' => 'static_pages#finaid'
+  get 'grades' => 'static_pages#grades'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 

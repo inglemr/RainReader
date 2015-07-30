@@ -269,3 +269,11 @@ li.active{
     text-decoration: none;
     background-color: yellow;
 }
+
+.inline {
+	display:inline;
+	h2.right-text {
+		float: right;
+	}
+}
+

@@ -16,5 +16,9 @@ class StaticPagesController < ApplicationController
     render 'home'
   end
 
+  def class_list
+
+  end
+
 
 end

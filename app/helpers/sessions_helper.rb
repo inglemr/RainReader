@@ -61,12 +61,15 @@ module SessionsHelper
       mechanize = Mechanize.new
       mechanize.follow_meta_refresh = true
       page = mechanize.get('https://rain.gsw.edu/prod8x/twbkwbis.P_WWWLogin')
-      pp page
       form = page.form('loginform')
       form.sid = current_user.gswid
       form.PIN = current_user.gswpin
       button = form.button_with(:value => 'Login')
       page = mechanize.submit(form, button)
+      if page.uri.to_s == "https://rain.gsw.edu/prod8x/twbkwbis.P_ValLogin"
+        current_user.s_classes.delete_all
+        flash.now[:danger] = "GSW Credentials are incorrect!"
+     else
       page = page.link_with(:text => 'Student Services').click
       page = page.link_with(:text => 'Registration').click
       page = page.link_with(:text => 'Concise Student Schedule').click
@@ -101,12 +104,13 @@ module SessionsHelper
                                         :Location => classHash[:Location],
                                         :Instructor => classHash[:Instructor])
           end
-
           $i += 1
       end while $i < table.size
       user.classUpdateTime = DateTime.now
       user.save
       flash.now[:notice] = "Schedule Refreshed"
+      puts "worked"
+    end
     else
     end
   end
