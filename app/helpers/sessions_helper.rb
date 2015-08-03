@@ -90,7 +90,17 @@ module SessionsHelper
           classHash[:Location] = page.parser.xpath(tableXpath + '[' + $i.to_s + ']/td[11]/text()').text
           classHash[:Instructor] = page.parser.xpath(tableXpath + '[' + $i.to_s + ']/td[12]/text()').text
           if user.s_classes.find_by(:CRN => classHash[:CRN])
-            #SKIP CLASS
+            user.s_classes.find_by(:CRN => classHash[:CRN]).update(:CRN => classHash[:CRN],
+                                        :Course =>  classHash[:Course],
+                                        :Title => classHash[:Title],
+                                        :Campus => classHash[:Campus],
+                                        :Credits => classHash[:Credits],
+                                        :StartDate => classHash[:StartDate],
+                                        :EndDate => classHash[:EndDate],
+                                        :Days => classHash[:Days],
+                                        :Time => classHash[:Time],
+                                        :Location => classHash[:Location],
+                                        :Instructor => classHash[:Instructor])
           else
           @class = user.s_classes.create!(:CRN => classHash[:CRN],
                                         :Course =>  classHash[:Course],
@@ -113,6 +123,16 @@ module SessionsHelper
     end
     else
     end
+  end
+
+  def getAllClasses()
+      agent = Mechanize.new
+      page = agent.get('https://rain.gsw.edu/sched201508.htm')
+
+      page.parser.xpath("//font/table")
+
+
+
   end
 
 end

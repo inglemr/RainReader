@@ -1,0 +1,23 @@
+<% agent = Mechanize.new %>
+<% page = agent.get('https://rain.gsw.edu/sched201508.htm') %>
+<table class='table-hover table-bordered'>
+<% $y = 1 %>
+<% begin %>
+  <%repeat = "font/" * $y %>
+  <% xpath = "//body/"+ repeat +"table/tr" %>
+  <% table = page.parser.xpath(xpath) %>
+  <% begin %>
+   <% $i = 1 %>
+   <tr>
+   <% $x = 2 %>
+    <%begin %>
+      <% path = xpath + "[" + $i.to_s + "]/td["+ $x.to_s + "]" %>
+      <td><%= page.parser.xpath(path).text.strip %></td>
+      <% $x += 1 %>
+    <% end while $x < 14 %>
+   </tr>
+   <% $i += 1 %>
+  <% end while $i < table.size %>
+ <% $y += 1 %>
+<% end while 0 < page.parser.xpath(xpath).size %>
+</table>
