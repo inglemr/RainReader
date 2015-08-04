@@ -6,7 +6,9 @@
 	color: white;
 }
 
-
+.entriesRight{
+	float:right;
+}
 .success{
 	background-color: #009900;
 	color: white;
@@ -293,4 +295,13 @@ li.active{
 	h2.right-text {
 		float: right;
 	}
+}
+
+
+.pagination{
+     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

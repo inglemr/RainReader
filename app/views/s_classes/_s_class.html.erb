@@ -1,0 +1,46 @@
+<tr>
+  <% open = s_class.open %>
+  <% if open == false %>
+  <tr class="danger">
+  <td>Closed</td>
+  <% else %>
+    <tr class="success">
+    <td>Open</td>
+  <% end %>
+  <td><%= s_class.CRN %></td>
+  <td><%= s_class.course_code %></td>
+  <td><%= s_class.course_num %></td>
+  <td><%= s_class.Title %></td>
+  <td><%= s_class.term %></td>
+  <td><%= s_class.Credits %></td>
+  <td><%= s_class.open_seats %></td>
+  <td><%= s_class.tot_seats %></td>
+  <td><%= s_class.Days %>
+    <% if s_class.lab_day %>
+      <br>
+      <%= s_class.lab_day%></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= s_class.Time%>
+    <% if s_class.lab_time %>
+    <br>
+    <%= s_class.lab_time%></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= s_class.Location %>
+    <% if s_class.lab_loc %>
+    <br>
+    <%= s_class.lab_loc %></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= s_class.Instructor%>
+    <% if s_class.loc_prof %>
+    <br>
+    <%= s_class.loc_prof %></td>
+    <% else %>
+      </td>
+    <% end %>
+</tr>

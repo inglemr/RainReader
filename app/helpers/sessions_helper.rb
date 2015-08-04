@@ -106,8 +106,8 @@ module SessionsHelper
                                         :Location => classHash[:Location],
                                         :Instructor => classHash[:Instructor])
           else
-          @class = user.s_classes.create!(:CRN => classHash[:CRN],
-                                        :Course =>  classHash[:Course],
+            stuClass = SClass.find_by(:CRN => classHash[:CRN])
+            stuClass.update(:Course =>  classHash[:Course],
                                         :Title => classHash[:Title],
                                         :Campus => classHash[:Campus],
                                         :Credits => classHash[:Credits],
@@ -117,6 +117,9 @@ module SessionsHelper
                                         :Time => classHash[:Time],
                                         :Location => classHash[:Location],
                                         :Instructor => classHash[:Instructor])
+            stuClass.save
+            user.s_classes << stuClass
+            user.save
           end
           $i += 1
       end while $i < table.size
@@ -130,6 +133,7 @@ module SessionsHelper
   end
 
   def getAllClasses()
+    if SClass.all || SClass.first.updated_at > 5.minutes.ago
      agent = Mechanize.new
      page = agent.get('https://rain.gsw.edu/sched201508.htm')
      $y = 1
@@ -202,7 +206,7 @@ module SessionsHelper
                                         :Location => classHash[:Location],
                                         :Instructor => classHash[:Instructor])
             elsif is_number?(classHash[:CRN])
-              @class = SClass.create!(:CRN => classHash[:CRN],
+              tempClass = SClass.create!(:CRN => classHash[:CRN],
                                         :open => classHash[:open],
                                         :course_num => classHash[:course_num],
                                         :course_code => classHash[:course_code],
@@ -221,7 +225,7 @@ module SessionsHelper
           end while $i < (table.size + 1)
       $y += 1
     end while 0 < page.parser.xpath(xpath).size
-
+  end
 
   end
 

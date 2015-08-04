@@ -1,5 +1,5 @@
-
-<table class='table-hover'  width="100%" cellpadding="1" cellspacing="1">
+<%= will_paginate @s_classes %>
+<table class='table-hover center'  width="100%" cellpadding="1" cellspacing="1">
 <tr>
   <th>Open</th>
   <th>CRN</th>
@@ -15,54 +15,21 @@
   <th>Location</th>
   <th>Teacher</th>
 </tr>
-<% getAllClasses %>
-<% allClass = SClass.all.sort_by{|c| [c.course_code, c.course_num]}%>
-<% allClass.each do |course|  %>
-<tr>
-  <% open = course.open %>
-  <% if open == false %>
-  <tr class="danger">
-  <td>Closed</td>
-  <% else %>
-    <tr class="success">
-    <td>Open</td>
-  <% end %>
-  <td><%= course.CRN %></td>
-  <td><%= course.course_code %></td>
-  <td><%= course.course_num %></td>
-  <td><%= course.Title %></td>
-  <td><%= course.term %></td>
-  <td><%= course.Credits %></td>
-  <td><%= course.open_seats %></td>
-  <td><%= course.tot_seats %></td>
-  <td><%= course.Days %>
-    <% if course.lab_day %>
-      <br>
-      <%= course.lab_day%></td>
-    <% else %>
-      </td>
-    <% end %>
-  <td><%= course.Time%>
-    <% if course.lab_time %>
-    <br>
-    <%= course.lab_time%></td>
-    <% else %>
-      </td>
-    <% end %>
-  <td><%= course.Location %>
-    <% if course.lab_loc %>
-    <br>
-    <%= course.lab_loc %></td>
-    <% else %>
-      </td>
-    <% end %>
-  <td><%= course.Instructor%>
-    <% if course.loc_prof %>
-    <br>
-    <%= course.loc_prof %></td>
-    <% else %>
-      </td>
-    <% end %>
-</tr>
-<% end %>
+
+
+
+    <%= render @s_classes %>
 </table>
+
+<span class="entriesRight"><%= page_entries_info @s_classes %></span>
+<%= will_paginate @s_classes %>
+
+
+.results
+  - @search.each_hit_with_result do |hit, post|
+    .result
+      %h2= h post.title
+      %h6== (#{h hit.score})
+      %p= h truncate(post.body, :length => 100)
+.pagination
+  = will_paginate(@search.results)

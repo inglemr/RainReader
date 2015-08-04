@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'filterrific'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'will_paginate'

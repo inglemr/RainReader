@@ -17,10 +17,11 @@ class StaticPagesController < ApplicationController
   end
 
   def class_list
+    @s_classes = SClass.paginate(page: params[:page])
+
+    @search = SClass.search(:include => [:comments]) do
+      keywords(params[:q])
+    end
 
   end
-
-
-
-
 end
