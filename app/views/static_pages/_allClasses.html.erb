@@ -1,6 +1,5 @@
-<% agent = Mechanize.new %>
-<% page = agent.get('https://rain.gsw.edu/sched201508.htm') %>
-<table class='table-hover table-bordered'>
+
+<table class='table-hover'  width="100%" cellpadding="1" cellspacing="1">
 <tr>
   <th>Open</th>
   <th>CRN</th>
@@ -8,33 +7,62 @@
   <th>Course #</th>
   <th>Course Name</th>
   <th>Term</th>
-  <th>Cred HRS</th>
-  <th>Seats Avail</th>
-  <th>Tot Seats</th>
+  <th>Credits</th>
+  <th>Seats<br>Avail</th>
+  <th>Total<br>Seats</th>
   <th>Days </th>
   <th>Time</th>
-  <th>Loc</th>
+  <th>Location</th>
   <th>Teacher</th>
 </tr>
-<% $y = 1 %>
-<% begin %>
-  <%repeat = "font/" * $y %>
-  <% xpath = "//body/"+ repeat +"table/tr" %>
-  <% table = page.parser.xpath(xpath) %>
-  <% $i = 1 %>
-  <% begin %>
-   <tr>
-   <% $x = 2 %>
-   <td><%= page.parser.xpath(xpath + "[" + $i.to_s + "]/td[1]/b").text.strip%></td>
-    <%begin %>
-      <% path = xpath + "[" + $i.to_s + "]/td["+ $x.to_s + "]" %>
-      <td><%= page.parser.xpath(path).text.strip %></td>
-      <% $x += 1 %>
-    <% end while $x < 14 %>
-   </tr>
-   <% $i += 1 %>
-  <% end while $i < table.size %>
- <% $y += 1 %>
- <% puts "THIS IS THE SIZE OF THE PAGE" +page.parser.xpath(xpath).size.to_s %>
-<% end while 0 < page.parser.xpath(xpath).size %>
+<% getAllClasses %>
+<% allClass = SClass.all.sort_by{|c| [c.course_code, c.course_num]}%>
+<% allClass.each do |course|  %>
+<tr>
+  <% open = course.open %>
+  <% if open == false %>
+  <tr class="danger">
+  <td>Closed</td>
+  <% else %>
+    <tr class="success">
+    <td>Open</td>
+  <% end %>
+  <td><%= course.CRN %></td>
+  <td><%= course.course_code %></td>
+  <td><%= course.course_num %></td>
+  <td><%= course.Title %></td>
+  <td><%= course.term %></td>
+  <td><%= course.Credits %></td>
+  <td><%= course.open_seats %></td>
+  <td><%= course.tot_seats %></td>
+  <td><%= course.Days %>
+    <% if course.lab_day %>
+      <br>
+      <%= course.lab_day%></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= course.Time%>
+    <% if course.lab_time %>
+    <br>
+    <%= course.lab_time%></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= course.Location %>
+    <% if course.lab_loc %>
+    <br>
+    <%= course.lab_loc %></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= course.Instructor%>
+    <% if course.loc_prof %>
+    <br>
+    <%= course.loc_prof %></td>
+    <% else %>
+      </td>
+    <% end %>
+</tr>
+<% end %>
 </table>

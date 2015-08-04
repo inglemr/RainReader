@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729154339) do
+ActiveRecord::Schema.define(version: 20150804001402) do
 
   create_table "s_classes", force: :cascade do |t|
     t.string   "CRN"
@@ -26,8 +26,18 @@ ActiveRecord::Schema.define(version: 20150729154339) do
     t.string   "Location"
     t.string   "Instructor"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.boolean  "open"
+    t.string   "open_seats"
+    t.string   "tot_seats"
+    t.string   "term"
+    t.string   "course_num"
+    t.string   "course_code"
+    t.string   "lab_time"
+    t.string   "lab_loc"
+    t.string   "loc_prof"
+    t.string   "lab_day"
   end
 
   add_index "s_classes", ["user_id", "created_at"], name: "index_s_classes_on_user_id_and_created_at"

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'filterrific'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'will_paginate'

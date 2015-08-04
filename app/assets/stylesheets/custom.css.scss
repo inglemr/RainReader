@@ -1,6 +1,24 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.danger{
+	background-color: #CC0000;
+	color: white;
+}
+
+
+.success{
+	background-color: #009900;
+	color: white;
+}
+.table-hover > tbody > tr > td.danger:hover, .table-hover > tbody > tr > th.danger:hover, .table-hover > tbody > tr.danger:hover > td, .table-hover > tbody > tr:hover > .danger, .table-hover > tbody > tr.danger:hover > th
+{
+	color: black;
+}
+.table-hover > tbody > tr > td.success:hover, .table-hover > tbody > tr > th.success:hover, .table-hover > tbody > tr.success:hover > td, .table-hover > tbody > tr:hover > .success, .table-hover > tbody > tr.success:hover > th
+{
+		color: black;
+}
 
 /* universal */
 
@@ -276,4 +294,3 @@ li.active{
 		float: right;
 	}
 }
-

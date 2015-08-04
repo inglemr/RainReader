@@ -10,6 +10,10 @@ module SessionsHelper
 		@current_user = nil
 	end
 
+  def is_number? string
+    true if Float(string) rescue false
+  end
+
 	def logged_in?
 		!current_user.nil?
 	end
@@ -126,11 +130,97 @@ module SessionsHelper
   end
 
   def getAllClasses()
-      agent = Mechanize.new
-      page = agent.get('https://rain.gsw.edu/sched201508.htm')
+     agent = Mechanize.new
+     page = agent.get('https://rain.gsw.edu/sched201508.htm')
+     $y = 1
+      begin
+        repeat = "font/" * $y
+        xpath = "//body/"+ repeat +"table/tr"
+        table = page.parser.xpath(xpath)
+        $i = 1
+        lastCRN = "";
+          begin
+            classHash = Hash.new
+            closed =  page.parser.xpath(xpath + "[" + $i.to_s + "]/td[1]/b").text.strip #closed or not
+            if closed == 'C'
+              classHash[:open] = false
+            else
+              classHash[:open] = true
+            end
 
-      page.parser.xpath("//font/table")
+            classHash[:CRN] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[2]").text.strip
+            classHash[:course_code] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[3]").text.strip
+            classHash[:course_num] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[4]").text.strip
+            classHash[:Title] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[5]").text.strip
+            classHash[:term] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[6]").text.strip
+            if classHash[:term] == "1"
+              classHash[:term] = "Full"
+            elsif classHash[:term] == "2"
+              classHash[:term] = "First Half"
+            elsif classHash[:term] == "3"
+              classHash[:term] = "Second Half"
+            elsif classHash[:term] == "I"
+              classHash[:term] = "Full"
+            end
+            classHash[:Credits] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[7]").text.strip
+            classHash[:open_seats] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[8]").text.strip
+            classHash[:tot_seats] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[9]").text.strip
+            classHash[:Days] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[10]").text.strip
+            classHash[:Time] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[11]").text.strip
+            if classHash[:Time] == ""
+              classHash[:Time] = "Online"
+            end
+            classHash[:Location] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[12]").text.strip
+            classHash[:Instructor] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[13]").text.strip
 
+            if !is_number?(classHash[:CRN])
+              labClass = SClass.find_by(:CRN => lastCRN)
+              if labClass
+                labClass.update(:lab_time => classHash[:Time],
+                              :lab_loc => classHash[:Location],
+                              :loc_prof => classHash[:Instructor],
+                              :lab_day => classHash[:Days])
+                lastCRN = ""
+              end
+            else
+              lastCRN = classHash[:CRN]
+            end
+
+
+            if SClass.find_by(:CRN => classHash[:CRN])
+              SClass.find_by(:CRN => classHash[:CRN]).update(:CRN => classHash[:CRN],
+                                        :open => classHash[:open],
+                                        :course_num => classHash[:course_num],
+                                        :course_code => classHash[:course_code],
+                                        :Title => classHash[:Title],
+                                        :term => classHash[:term],
+                                        :Credits => classHash[:Credits],
+                                        :open_seats => classHash[:open_seats],
+                                        :tot_seats => classHash[:tot_seats],
+                                        :Days => classHash[:Days],
+                                        :Time => classHash[:Time],
+                                        :Location => classHash[:Location],
+                                        :Instructor => classHash[:Instructor])
+            elsif is_number?(classHash[:CRN])
+              @class = SClass.create!(:CRN => classHash[:CRN],
+                                        :open => classHash[:open],
+                                        :course_num => classHash[:course_num],
+                                        :course_code => classHash[:course_code],
+                                        :Title => classHash[:Title],
+                                        :term => classHash[:term],
+                                        :Credits => classHash[:Credits],
+                                        :open_seats => classHash[:open_seats],
+                                        :tot_seats => classHash[:tot_seats],
+                                        :Days => classHash[:Days],
+                                        :Time => classHash[:Time],
+                                        :Location => classHash[:Location],
+                                        :Instructor => classHash[:Instructor])
+            end
+
+           $i += 1
+          end while $i < (table.size + 1)
+      $y += 1
+    end while 0 < page.parser.xpath(xpath).size
 
 
   end
