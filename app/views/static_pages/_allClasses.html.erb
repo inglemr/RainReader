@@ -1,3 +1,4 @@
+<% getAllClasses %>
 <%= will_paginate @s_classes %>
 <table class='table-hover center'  width="100%" cellpadding="1" cellspacing="1">
 <tr>
@@ -23,13 +24,3 @@
 
 <span class="entriesRight"><%= page_entries_info @s_classes %></span>
 <%= will_paginate @s_classes %>
-
-
-.results
-  - @search.each_hit_with_result do |hit, post|
-    .result
-      %h2= h post.title
-      %h6== (#{h hit.score})
-      %p= h truncate(post.body, :length => 100)
-.pagination
-  = will_paginate(@search.results)

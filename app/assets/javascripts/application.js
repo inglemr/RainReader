@@ -15,5 +15,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require filterrific/filterrific-jquery
+//= require dataTables/jquery.dataTables
 //= require_tree
+

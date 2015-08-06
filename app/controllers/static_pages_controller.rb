@@ -17,11 +17,10 @@ class StaticPagesController < ApplicationController
   end
 
   def class_list
-    @s_classes = SClass.paginate(page: params[:page])
-
-    @search = SClass.search(:include => [:comments]) do
-      keywords(params[:q])
-    end
-
+    getAllClasses()
+    respond_to do |format|
+    format.html
+    format.json { render json: SClassDatatable.new(view_context) }
+  end
   end
 end

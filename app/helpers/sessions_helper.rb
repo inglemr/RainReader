@@ -133,7 +133,9 @@ module SessionsHelper
   end
 
   def getAllClasses()
-    if SClass.all || SClass.first.updated_at > 5.minutes.ago
+      allClasses = SClass.all
+      class_array = []
+      update_array = []
      agent = Mechanize.new
      page = agent.get('https://rain.gsw.edu/sched201508.htm')
      $y = 1
@@ -147,9 +149,9 @@ module SessionsHelper
             classHash = Hash.new
             closed =  page.parser.xpath(xpath + "[" + $i.to_s + "]/td[1]/b").text.strip #closed or not
             if closed == 'C'
-              classHash[:open] = false
+              classHash[:open] = "Closed"
             else
-              classHash[:open] = true
+              classHash[:open] = "Open"
             end
 
             classHash[:CRN] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[2]").text.strip
@@ -191,8 +193,8 @@ module SessionsHelper
             end
 
 
-            if SClass.find_by(:CRN => classHash[:CRN])
-              SClass.find_by(:CRN => classHash[:CRN]).update(:CRN => classHash[:CRN],
+            if allClasses.exists?(:CRN => classHash[:CRN])
+              allClasses.find_by(:CRN => classHash[:CRN]).update(:CRN => classHash[:CRN],
                                         :open => classHash[:open],
                                         :course_num => classHash[:course_num],
                                         :course_code => classHash[:course_code],
@@ -206,7 +208,7 @@ module SessionsHelper
                                         :Location => classHash[:Location],
                                         :Instructor => classHash[:Instructor])
             elsif is_number?(classHash[:CRN])
-              tempClass = SClass.create!(:CRN => classHash[:CRN],
+              tempClass = {:CRN => classHash[:CRN],
                                         :open => classHash[:open],
                                         :course_num => classHash[:course_num],
                                         :course_code => classHash[:course_code],
@@ -218,15 +220,22 @@ module SessionsHelper
                                         :Days => classHash[:Days],
                                         :Time => classHash[:Time],
                                         :Location => classHash[:Location],
-                                        :Instructor => classHash[:Instructor])
+                                        :Instructor => classHash[:Instructor]}
+              class_array.push tempClass
             end
 
            $i += 1
           end while $i < (table.size + 1)
       $y += 1
     end while 0 < page.parser.xpath(xpath).size
-  end
 
+    ActiveRecord::Base.transaction do
+      class_array.each do |a|
+      e = SClass.create(a)
+    end
   end
+end
+
+
 
 end

@@ -10,7 +10,23 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+  *= require dataTables/jquery.dataTables
  *= require_tree .
  *= require_self
  */
+   td.sorting_1{
+   color:black;
+   background-color:transparent;
+}
+
+
+.danger{
+  background-color: #CC0000 !important;
+  color: white;
+}
+
+.success{
+  background-color: #009900 !important;
+  color: white;
+}
 

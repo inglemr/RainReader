@@ -1,5 +1,75 @@
+
 <h1>Class List</h1>
 
-<%= render 'allClasses' %>
+
+<table id="stuclasses" class="display" >
+<thead>
+  <tr>
+    <th>Available</th>
+    <th>CRN</th>
+    <th>Class Code</th>
+    <th>Class #</th>
+    <th>Name</th>
+    <th>Term</th>
+    <th>Credits</th>
+    <th>Open Seats</th>
+    <th>Total Seats</th>
+    <th>Days</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Professor</th>
+
+  </tr>
+</thead>
+<tbody>
+  <% SClass.all.each do |sclass| %>
+
+
+      <% if sclass.open == "Closed" %>
+        <tr class="danger">
+      <% else %>
+        <tr class="success">
+      <% end %>
+      <td><%= sclass.open  %></td>
+      <td><%= sclass.CRN %></td>
+      <td><%= sclass.course_code %></td>
+      <td><%= sclass.course_num %></td>
+      <td><%= sclass.Title %></td>
+      <td><%= sclass.term %></td>
+      <td><%= sclass.Credits %></td>
+      <td><%= sclass.open_seats %></td>
+      <td><%= sclass.tot_seats %></td>
+      <td><%= sclass.Days %>
+      <% if sclass.lab_day %>
+      <br>
+        <%= sclass.lab_day%></td>
+      <% else %>
+        </td>
+      <% end %>
+      <td><%= sclass.Time%>
+      <% if sclass.lab_time %>
+      <br>
+      <%= sclass.lab_time%></td>
+      <% else %>
+      </td>
+      <% end %>
+      <td><%= sclass.Location %>
+      <% if sclass.lab_loc %>
+      <br>
+      <%= sclass.lab_loc %></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= sclass.Instructor%>
+    <% if sclass.loc_prof %>
+    <br>
+    <%= sclass.loc_prof %></td>
+    <% else %>
+      </td>
+    <% end %>
+    </tr>
+  <% end %>
+</tbody>
+</table>
 
 
