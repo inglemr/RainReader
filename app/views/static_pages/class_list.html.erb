@@ -34,13 +34,21 @@
       <td><%= sclass.CRN %></td>
       <td><%= sclass.course_code %></td>
       <td><%= sclass.course_num %></td>
-      <td><%= sclass.Title %></td>
+      <td><%= sclass.Title %>
+        <% if sclass.lab_time %>
+          <br>
+          <br>
+          Lab</td>
+      <% else %>
+      </td>
+      <%end %>
       <td><%= sclass.term %></td>
       <td><%= sclass.Credits %></td>
       <td><%= sclass.open_seats %></td>
       <td><%= sclass.tot_seats %></td>
       <td><%= sclass.Days %>
       <% if sclass.lab_day %>
+      <br>
       <br>
         <%= sclass.lab_day%></td>
       <% else %>
@@ -49,6 +57,7 @@
       <td><%= sclass.Time%>
       <% if sclass.lab_time %>
       <br>
+       <br>
       <%= sclass.lab_time%></td>
       <% else %>
       </td>
@@ -56,6 +65,7 @@
       <td><%= sclass.Location %>
       <% if sclass.lab_loc %>
       <br>
+       <br>
       <%= sclass.lab_loc %></td>
     <% else %>
       </td>
@@ -63,6 +73,7 @@
   <td><%= sclass.Instructor%>
     <% if sclass.loc_prof %>
     <br>
+     <br>
     <%= sclass.loc_prof %></td>
     <% else %>
       </td>

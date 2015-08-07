@@ -144,7 +144,6 @@ module SessionsHelper
         xpath = "//body/"+ repeat +"table/tr"
         table = page.parser.xpath(xpath)
         $i = 1
-        lastCRN = "";
           begin
             classHash = Hash.new
             closed =  page.parser.xpath(xpath + "[" + $i.to_s + "]/td[1]/b").text.strip #closed or not
@@ -179,20 +178,6 @@ module SessionsHelper
             classHash[:Location] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[12]").text.strip
             classHash[:Instructor] = page.parser.xpath(xpath + "[" + $i.to_s + "]/td[13]").text.strip
 
-            if !is_number?(classHash[:CRN])
-              labClass = SClass.find_by(:CRN => lastCRN)
-              if labClass
-                labClass.update(:lab_time => classHash[:Time],
-                              :lab_loc => classHash[:Location],
-                              :loc_prof => classHash[:Instructor],
-                              :lab_day => classHash[:Days])
-                lastCRN = ""
-              end
-            else
-              lastCRN = classHash[:CRN]
-            end
-
-
               tempClass = {:CRN => classHash[:CRN],
                                         :open => classHash[:open],
                                         :course_num => classHash[:course_num],
@@ -216,6 +201,7 @@ module SessionsHelper
       $y += 1
     end while 0 < page.parser.xpath(xpath).size
 
+    lastCRN = "";
     ActiveRecord::Base.transaction do
       class_array.each do |a|
         if allClasses.exists?(:CRN => a[:CRN])
@@ -232,8 +218,20 @@ module SessionsHelper
                                         :Time => a[:Time],
                                         :Location => a[:Location],
                                         :Instructor => a[:Instructor])
-        elsif
+        elsif is_number?(a[:CRN])
           SClass.create(a)
+        end
+        if is_number?(a[:CRN]) == false
+              labClass = SClass.find_by(:CRN => lastCRN)
+              if labClass
+                labClass.update(:lab_time => a[:Time],
+                              :lab_loc => a[:Location],
+                              :loc_prof => a[:Instructor],
+                              :lab_day => a[:Days])
+                lastCRN = ""
+              end
+        else
+          lastCRN = a[:CRN]
         end
 
     end
