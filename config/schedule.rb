@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 1.minutes do
-  runner "getAllClasses"
+every 5.minutes do
+  runner "SClass.getAllClasses()"
 end
