@@ -193,21 +193,6 @@ module SessionsHelper
             end
 
 
-            if allClasses.exists?(:CRN => classHash[:CRN])
-              allClasses.find_by(:CRN => classHash[:CRN]).update(:CRN => classHash[:CRN],
-                                        :open => classHash[:open],
-                                        :course_num => classHash[:course_num],
-                                        :course_code => classHash[:course_code],
-                                        :Title => classHash[:Title],
-                                        :term => classHash[:term],
-                                        :Credits => classHash[:Credits],
-                                        :open_seats => classHash[:open_seats],
-                                        :tot_seats => classHash[:tot_seats],
-                                        :Days => classHash[:Days],
-                                        :Time => classHash[:Time],
-                                        :Location => classHash[:Location],
-                                        :Instructor => classHash[:Instructor])
-            elsif is_number?(classHash[:CRN])
               tempClass = {:CRN => classHash[:CRN],
                                         :open => classHash[:open],
                                         :course_num => classHash[:course_num],
@@ -222,7 +207,9 @@ module SessionsHelper
                                         :Location => classHash[:Location],
                                         :Instructor => classHash[:Instructor]}
               class_array.push tempClass
-            end
+
+
+
 
            $i += 1
           end while $i < (table.size + 1)
@@ -231,11 +218,33 @@ module SessionsHelper
 
     ActiveRecord::Base.transaction do
       class_array.each do |a|
-      e = SClass.create(a)
+        if allClasses.exists?(:CRN => a[:CRN])
+          allClasses.find_by(:CRN => a[:CRN]).update(:CRN => a[:CRN],
+                                        :open => a[:open],
+                                        :course_num => a[:course_num],
+                                        :course_code => a[:course_code],
+                                        :Title => a[:Title],
+                                        :term => a[:term],
+                                        :Credits => a[:Credits],
+                                        :open_seats => a[:open_seats],
+                                        :tot_seats => a[:tot_seats],
+                                        :Days => a[:Days],
+                                        :Time => a[:Time],
+                                        :Location => a[:Location],
+                                        :Instructor => a[:Instructor])
+        elsif
+          SClass.create(a)
+        end
+
     end
   end
 end
 
 
+def updateClassListIfNeeded()
+   if SClass.all.size == 0 || SClass.first.updated_at > 5.minutes.ago.to_datetime
+      getAllClasses()
+    end
+  end
 
 end

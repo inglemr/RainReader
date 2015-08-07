@@ -8,6 +8,7 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'jquery-turbolinks'
 
 gem 'faker'
 gem 'bootstrap-sass',       '3.2.0.0'
