@@ -205,7 +205,7 @@ module SessionsHelper
     ActiveRecord::Base.transaction do
       class_array.each do |a|
         if allClasses.exists?(:CRN => a[:CRN])
-          allClasses.find_by(:CRN => a[:CRN]).update(:CRN => a[:CRN],
+          SClass.find_by(:CRN => a[:CRN]).update(:CRN => a[:CRN],
                                         :open => a[:open],
                                         :course_num => a[:course_num],
                                         :course_code => a[:course_code],
@@ -239,10 +239,8 @@ module SessionsHelper
 end
 
 
-def updateClassListIfNeeded()
-   if SClass.all.size == 0 || SClass.first.updated_at > 5.minutes.ago.to_datetime
-      getAllClasses()
-    end
-  end
+def testMethod()
+  puts "IT WORKS"
+end
 
 end

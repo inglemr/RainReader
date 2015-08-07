@@ -17,7 +17,6 @@ class StaticPagesController < ApplicationController
   end
 
   def class_list
-    updateClassListIfNeeded()
     respond_to do |format|
     format.html
     format.json { render json: SClassDatatable.new(view_context) }

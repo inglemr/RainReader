@@ -10,6 +10,8 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'jquery-turbolinks'
 
+gem 'whenever'
+
 gem 'faker'
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'bcrypt'
