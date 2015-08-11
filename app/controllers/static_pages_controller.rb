@@ -18,7 +18,7 @@ class StaticPagesController < ApplicationController
 
   def refresh_classlist_action
     SClass.getAllClasses()
-    puts "Classes Refreshed"
+    flash[:success] = "Classes Refreshed"
     redirect_to class_list_path
 
   end
