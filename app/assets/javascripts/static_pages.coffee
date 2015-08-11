@@ -3,8 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-        $('#stuclasses').dataTable()
-         bJQueryUI: true
-         bProcessing: true
-         bServerSide: true
-         sAjaxSource: $('#s_classes').data('source')
+        $('#stuclasses').dataTable({
+         responsive: true})
