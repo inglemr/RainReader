@@ -7,7 +7,7 @@ class SClass < ActiveRecord::Base
 
   end
 
- def SClass.getAllClasses()
+ def self.getAllClasses()
       allClasses = SClass.all
       class_array = []
       update_array = []
