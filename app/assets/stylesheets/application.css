@@ -12,9 +12,14 @@
  *
   *= require dataTables/jquery.dataTables
   *= require dataTables/extras/dataTables.tableTools
+  *= require nprogress
+  *= require nprogress-bootstrap
  *= require_tree .
  *= require_self
  */
+
+
+
 input.text_filter.form-control.search_init{
     width:60px;
 }

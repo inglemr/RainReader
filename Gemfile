@@ -9,7 +9,7 @@ gem 'mechanize'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'jquery-turbolinks'
-
+gem 'nprogress-rails'
 gem 'whenever'
 
 gem 'faker'

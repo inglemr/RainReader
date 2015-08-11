@@ -16,6 +16,14 @@ class StaticPagesController < ApplicationController
     render 'home'
   end
 
+  def refresh_classlist_action
+    SClass.getAllClasses()
+    puts "Classes Refreshed"
+    redirect_to class_list_path
+
+  end
+
+
   def class_list
     respond_to do |format|
     format.html

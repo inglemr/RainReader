@@ -20,5 +20,27 @@
 //= require dataTables/extras/dataTables.colReorder
 //= require dataTables/extras/dataTables.colVis
 //= require jquery.dataTables.columnFilter.js
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree
 
+$(document).on('page:fetch',   function() { NProgress.start(); });
+$(document).on('page:change',  function() { NProgress.done(); });
+$(document).on('page:restore', function() { NProgress.remove(); });
+$( document ).ready(function() {
+
+  // hide spinner
+  $(".spin").hide();
+
+
+  // show spinner on AJAX start
+  $(document).ajaxStart(function(){
+    $(".spin").show();
+  });
+
+  // hide spinner on AJAX stop
+  $(document).ajaxStop(function(){
+    $(".spin").hide();
+  });
+
+});

@@ -1,6 +1,9 @@
 
 <h1>Class List</h1>
 
+<%= link_to  refresh_classlist_action_path,class:'btn btn-primary refreshClass' do %>
+  <span class="glyphicon glyphicon-refresh"></span>Refresh
+<% end %>
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Convergence" />
 <table id="stuclasses" class="classData" style="width:1300px">
 <thead>
@@ -19,8 +22,14 @@
     <th>Location</th>
     <th>Professor</th>
   </tr>
+
 </thead>
 <tbody>
+<div class="spin">  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div></div>
   <% SClass.all.each do |sclass| %>
 
 
@@ -79,7 +88,9 @@
     <% end %>
     </tr>
   <% end %>
+
 </tbody>
+
 </table>
 
 

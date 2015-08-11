@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   get 'static_pages#home/refresh/:user_id' => 'static_pages#refresh_action', as: :refresh_action
+  get 'class_list/refresh' => 'static_pages#refresh_classlist_action', as: :refresh_classlist_action
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
