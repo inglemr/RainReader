@@ -17,5 +17,8 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require dataTables/jquery.dataTables
+//= require dataTables/extras/dataTables.colReorder
+//= require dataTables/extras/dataTables.colVis
+//= require jquery.dataTables.columnFilter.js
 //= require_tree
 
