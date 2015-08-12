@@ -39,8 +39,13 @@ div#stuclasses_length.dataTables_length{
   white-space: nowrap;
 }
 
+div#schedule_length.dataTables_length{
+  margin-top: 2%;
+  white-space: nowrap;
+}
+
 div#stuclasses_filter.dataTables_filter{
-  float:left;
+   position: absolute 500px;
    white-space:nowrap;
 
 
@@ -105,7 +110,7 @@ button.ColVis_Button, ul.ColVis_collection li {
 }
 ul.ColVis_collection li {
 
-    font-size: 0.7em;
+    font-size: 1em;
     color: black !important;
     white-space: nowrap;
     border-radius: 2px;
@@ -181,10 +186,7 @@ ul.ColVis_collection{
 
 }
 button.ColVis_Button.ColVis_MasterButton{
-position: relative;
-    float: right !important;
-    margin-right: 3px;
-    padding: 5px 8px;
+position: absolute;
     border: 1px solid #999;
     cursor: pointer;
     font-size: 0.88em;
@@ -225,3 +227,6 @@ min-width: 980px !important;
   color: white;
 }
 
+.stuclasses{
+    postion: relative;
+}

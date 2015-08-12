@@ -57,6 +57,7 @@ module SessionsHelper
 
 
   def getSchedule(user, update = false)
+
     updateTime = 24.hours.ago.to_datetime
     if user.classUpdateTime
       updateTime = user.classUpdateTime
@@ -71,7 +72,7 @@ module SessionsHelper
       button = form.button_with(:value => 'Login')
       page = mechanize.submit(form, button)
       if page.uri.to_s == "https://rain.gsw.edu/prod8x/twbkwbis.P_ValLogin"
-        current_user.s_classes.delete_all
+
         flash.now[:danger] = "GSW Credentials are incorrect!"
      else
       page = page.link_with(:text => 'Student Services').click
@@ -106,19 +107,7 @@ module SessionsHelper
                                         :Location => classHash[:Location],
                                         :Instructor => classHash[:Instructor])
           else
-            stuClass = SClass.find_by(:CRN => classHash[:CRN])
-            stuClass.update(:Course =>  classHash[:Course],
-                                        :Title => classHash[:Title],
-                                        :Campus => classHash[:Campus],
-                                        :Credits => classHash[:Credits],
-                                        :StartDate => classHash[:StartDate],
-                                        :EndDate => classHash[:EndDate],
-                                        :Days => classHash[:Days],
-                                        :Time => classHash[:Time],
-                                        :Location => classHash[:Location],
-                                        :Instructor => classHash[:Instructor])
-            stuClass.save
-            user.s_classes << stuClass
+            user.s_classes << SClass.find_by(:CRN => classHash[:CRN])
             user.save
           end
           $i += 1
@@ -126,16 +115,9 @@ module SessionsHelper
       user.classUpdateTime = DateTime.now
       user.save
       flash.now[:notice] = "Schedule Refreshed"
-      puts "worked"
     end
     else
     end
   end
-
-
-
-def testMethod()
-  puts "IT WORKS"
-end
 
 end

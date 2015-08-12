@@ -1,15 +1,91 @@
+<br>
 <h3 class="inline"><%= current_user.name %>,</h3>
 <h3 class="inline right-text ">Course Schedule</h3>
-
+<%= link_to  refresh_action_path(current_user.id),class:'btn btn-primary refreshClass' do %>
+  <span class="glyphicon glyphicon-refresh"></span>Refresh
+<% end %>
 <% if current_user.gswid && current_user.gswpin%>
 <% getSchedule(current_user,false) %>
-  <%= render 'studentSchedule' %>
+
+<table id="schedule" class="classData">
+<thead>
+  <tr class="classHeader">
+    <th>CRN</th>
+    <th>Code</th>
+    <th>Class<br>Num</th>
+    <th>Name</th>
+    <th>Term</th>
+    <th>Credits</th>
+    <th>Days</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Professor</th>
+  </tr>
+
+</thead>
+<tbody>
+<% credits = 0 %>
+<% current_user.s_classes.each do |s_class|%>
+
+<tr>
+  <td><%= s_class.CRN %></td>
+  <td><%= s_class.course_code %></td>
+  <td><%= s_class.course_num %></td>
+  <td><%= s_class.Title %></td>
+  <td><%= s_class.term %></td>
+  <td><%= s_class.Credits %></td>
+  <% credits += s_class.Credits.to_f   %>
+  <td><%= s_class.Days %>
+    <% if s_class.lab_day %>
+      <br>
+      <%= s_class.lab_day%></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= s_class.Time%>
+    <% if s_class.lab_time %>
+    <br>
+    <%= s_class.lab_time%></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= s_class.Location %>
+    <% if s_class.lab_loc %>
+    <br>
+    <%= s_class.lab_loc %></td>
+    <% else %>
+      </td>
+    <% end %>
+  <td><%= s_class.Instructor%>
+    <% if s_class.loc_prof %>
+    <br>
+    <%= s_class.loc_prof %></td>
+    <% else %>
+      </td>
+    <% end %>
+</tr>
+
+<% end %>
+</tbody>
+</table>
+<table class="table-hover">
+  <thead>
+  <tr>
+    <th>Total Credits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td><%=credits %></td>
+    </tr>
+  </tbody>
+
+</table>
+
 <% else %>
 <% flash[:notice] = "Add your GSW ID And PIN to your profile to display your class schedule here" %>
 <% end %>
 </tbody>
 </table>
-<%= link_to  refresh_action_path(current_user.id),class:'btn btn-primary refreshClass' do %>
-  <span class="glyphicon glyphicon-refresh"></span>Refresh
-<% end %>
+
 

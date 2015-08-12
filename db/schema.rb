@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806132510) do
+ActiveRecord::Schema.define(version: 20150812020312) do
 
   create_table "s_classes", force: :cascade do |t|
     t.string   "CRN"
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 20150806132510) do
 
   add_index "s_classes", ["user_id", "created_at"], name: "index_s_classes_on_user_id_and_created_at"
   add_index "s_classes", ["user_id"], name: "index_s_classes_on_user_id"
+
+  create_table "s_classes_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "s_class_id"
+  end
+
+  add_index "s_classes_users", ["user_id", "s_class_id"], name: "index_s_classes_users_on_user_id_and_s_class_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
