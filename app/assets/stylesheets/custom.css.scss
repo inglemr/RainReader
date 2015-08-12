@@ -22,6 +22,8 @@ tr.success > td.sorting_1{
 	}
 
 
+
+
 .classData{
 	float:left;
 	position: relative;
@@ -297,6 +299,19 @@ input {
 	float:right;
 	margin: 5px;
   postion: relative;
+
+}
+.btn.btn-primary.adminMenu
+{
+  padding: 5px;
+  margin: 5px;
+  color: white;
+}
+.btn.btn-primary.adminMenu:hover
+{
+  padding: 5px;
+  margin: 5px;
+  color: black;
 }
 
 
