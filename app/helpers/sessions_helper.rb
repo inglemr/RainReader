@@ -75,6 +75,7 @@ module SessionsHelper
 
         flash.now[:danger] = "GSW Credentials are incorrect!"
      else
+      user.s_classes.delete_all
       page = page.link_with(:text => 'Student Services').click
       page = page.link_with(:text => 'Registration').click
       page = page.link_with(:text => 'Concise Student Schedule').click
