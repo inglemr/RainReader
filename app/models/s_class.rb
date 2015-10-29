@@ -8,9 +8,8 @@ class SClass < ActiveRecord::Base
   end
 
 def self.deleteAll()
-  {
     SClass.delete_all
-  }
+  end
 
  def self.getAllClasses()
       allClasses = SClass.all
