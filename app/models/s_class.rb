@@ -12,7 +12,7 @@ class SClass < ActiveRecord::Base
       class_array = []
       update_array = []
      agent = Mechanize.new
-     page = agent.get('https://rain.gsw.edu/sched201508.htm')
+     page = agent.get('https://rain.gsw.edu/sched201602.htm')
      $y = 1
       begin
         repeat = "font/" * $y

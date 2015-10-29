@@ -8,23 +8,23 @@
       <%= render 'shared/error_messages' %>
 
       <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name, class: 'login' %>
 
       <%= f.label :email %>
-      <%= f.email_field :email,class: 'form-control' %>
+      <%= f.email_field :email,class: 'login' %>
 
       <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= f.password_field :password, class: 'login' %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
 
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <%= f.password_field :password_confirmation, class: 'login' %>
 
       <%= f.label :gswid,"GSW RAIN ID" %>
-      <%= f.text_field :gswid, class: 'form-control' %>
+      <%= f.text_field :gswid, class: 'login' %>
 
       <%= f.label :gswpin, "GSW RAIN Pin" %>
-      <%= f.text_field :gswpin,class: 'form-control' %>
+      <%= f.text_field :gswpin,class: 'login' %>
       <%= f.submit "Save changes",  class: "btn btn-primary" %>
 
       <% end %>

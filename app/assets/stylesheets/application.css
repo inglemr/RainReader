@@ -17,26 +17,34 @@
  *= require_tree .
  *= require_self
  */
+.classHeader{
 
-
-
-input.text_filter.form-control.search_init{
-     width: 60px;
-
-}
-input.text_filter.form-control{
-
-
+    background: -moz-linear-gradient(top, #F0F0F0 0, #DBDBDB 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F0F0F0), color-stop(100%, #DBDBDB));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F0F0F0', endColorstr='#DBDBDB', GradientType=0);
+border: 1px solid #B0B0B0;
+color: #444;
 }
 
-select.select_filter.form-control{
-     width: 70%;
+ .form-control{
 
+height:20px !important;
+padding:3px;
+width: 80px;
+text-align: center;
+ }
+ table.dataTable thead th, table.dataTable thead td {
+    border:none;
+    padding:3px;
+    
 }
-select.search_init.select_filter.form-control{
- width: auto;
+#stuclasses{
+    border:none;
+}
+.form-control.search_init{
+    
+}
 
-}
 
 div#stuclasses_length.dataTables_length{
   margin-top: 2%;
@@ -50,6 +58,7 @@ div#schedule_length.dataTables_length{
 
 div#stuclasses_filter.dataTables_filter{
    position: absolute 200px;
+   margin-right:auto; margin-left:auto;
    white-space:nowrap;
 
 }
@@ -88,7 +97,7 @@ button.ColVis_Button, ul.ColVis_collection li {
     position: relative;
     float: left;
     margin-right: 3px;
-    padding: 5px 8px;
+    padding: 2px 3px;
     border: 1px solid #999;
     cursor: pointer;
     font-size: 0.88em;
@@ -183,7 +192,7 @@ ul.ColVis_collection{
     border: 1px solid rgba( 0, 0, 0, 0.4 );
 
 
- height: 330px; /*your fixed height*/
+ height: 50px; /*your fixed height*/
     -webkit-column-count: 2;
        -moz-column-count: 2;
             column-count: 2;
@@ -221,13 +230,14 @@ div#stuclasses_paginate.dataTables_paginate.paging_simple_numbers{
   margin: 0 auto !important;
 }
 .danger{
-  background-color: #CC0000 !important;
-  color: white;
+    color: #808080;
+  background-color: #D8D8D8   !important;
+  
 }
 
 .success{
-  background-color: #009900 !important;
-  color: white;
+  background-color: white !important;
+  color: black;
 }
 
 

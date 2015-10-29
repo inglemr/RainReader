@@ -9,10 +9,9 @@ jQuery ->
 
 jQuery ->
       $('#stuclasses').dataTable({
-         "sDom": '<"top">Cf<"top><"bottom">l<"center">p<"center"><"bottom"><"clear">'
-         }).columnFilter({sPlaceHolder: "head:before",aoColumns: [   {type: "select"  },
-                  { type: "text" },
-                                         { type: "select" },null,{ type: "text" },{type: "select" },{type: "select" },null,null,{type: "text" },{type: "text" },{type: "select" },{type: "text" }
+         "order": [[ 2, "asc" ]],"sDom": '<"top">f<"top><"bottom">lp<"bottom">'
+         }).columnFilter({sPlaceHolder: "head:before",aoColumns: [ {type: "select" },
+                  { type: "text" },null,null,null,{type: "select" },null,null,null,{type: "text" },null,null,null
             ]});
 
 
