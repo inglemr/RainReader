@@ -7,6 +7,11 @@ class SClass < ActiveRecord::Base
 
   end
 
+def self.deleteAll()
+  {
+    SClass.delete_all
+  }
+
  def self.getAllClasses()
       allClasses = SClass.all
       class_array = []

@@ -23,6 +23,12 @@ class StaticPagesController < ApplicationController
 
   end
 
+   def delete_classlist_action
+    SClass.deleteAll()
+    flash[:success] = "Classes Refreshed"
+    redirect_to class_list_path
+
+  end
 
   def class_list
     respond_to do |format|
