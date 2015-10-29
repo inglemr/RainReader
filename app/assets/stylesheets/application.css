@@ -21,17 +21,21 @@
 
 
 input.text_filter.form-control.search_init{
-    width:60px;
+     width: 60px;
+
 }
 input.text_filter.form-control{
-    width:60px;
+
+
 }
 
 select.select_filter.form-control{
-    width:95px;
+     width: 70%;
+
 }
 select.search_init.select_filter.form-control{
-width: 95px;
+ width: auto;
+
 }
 
 div#stuclasses_length.dataTables_length{
@@ -45,12 +49,12 @@ div#schedule_length.dataTables_length{
 }
 
 div#stuclasses_filter.dataTables_filter{
-   position: absolute 500px;
+   position: absolute 200px;
    white-space:nowrap;
 
-
-
 }
+
+
 div.ColVis_collectionBackground {
     position: fixed;
     top: 0;
@@ -214,7 +218,6 @@ position: absolute;
 
 div#stuclasses_paginate.dataTables_paginate.paging_simple_numbers{
    margin-top: 2%;
-min-width: 980px !important;
   margin: 0 auto !important;
 }
 .danger{
@@ -227,6 +230,4 @@ min-width: 980px !important;
   color: white;
 }
 
-.stuclasses{
-    postion: relative;
-}
+
